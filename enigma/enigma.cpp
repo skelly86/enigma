@@ -1,11 +1,10 @@
 /*
  * Implement to handle encrypting a file
+ * TODO make encrypted file in an (original file name).extension format
  */
 
 #include"enigma.h"
-
-bool encrypt(const string &fileName)
-{
+bool encrypt(const string &fileName) {
 	bool success = true;
 	try {
 		// file data
@@ -69,7 +68,7 @@ bool decrypt(const string &fileName)
 		string message;
 		int rotator = ROTOR;
 		// Encrypt the file name
-		for (unsigned i = 0; i < fileName.length(); i++) {
+		for (unsigned int i = 0; i < fileName.length(); i++) {
 			// change letter based on position of rotor
 			newMessage += (static_cast<unsigned char>(fileName[i]) + rotator) % UCHAR_MAX;
 			// increment rotor
@@ -103,4 +102,8 @@ bool decrypt(const string &fileName)
 	}
 	// return if file was encrypted
 	return success;
+}
+// TODO Implement function cipher
+bool cipher(string &message, unsigned int rotor) {
+	return 1;
 }

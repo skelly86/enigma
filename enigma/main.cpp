@@ -10,8 +10,7 @@
 #include"enigma.h"
 
 // change from handling a message to handling a file
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
 	// Data to hold the two message forms
 	string fileName;
 	int ending = 0;
@@ -52,13 +51,13 @@ int main(int argc, char **argv)
 			else
 				cout << "encryption complete" << endl;
 		else if(strcmp(argv[0], "-d") == 0)
-			if(!decrypt(fileName)){
+			if(!decrypt(fileName)) {
 				cerr << "failed to decrypt " << fileName << endl;
 				ending++;
 			}
 			else
 				cout << "decryption complete" << endl;
-		else{
+		else {
 			cerr << "unrecognized function" << argv[0] << endl;
 			ending++;
 		}

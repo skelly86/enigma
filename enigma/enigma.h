@@ -17,4 +17,6 @@ bool encrypt(const string &fileName);
 
 bool decrypt(const string &fileName);
 
+bool cipher(string &message, unsigned int rotor);
+
 #endif
