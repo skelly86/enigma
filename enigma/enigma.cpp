@@ -13,18 +13,9 @@ bool encrypt(const string &fileName) {
 		uncrypt.open(file.c_str());
 	
 		// data to hold the encrypted message
-		string newMessage = "";
 		string message;
-		int rotator = ROTOR;
-	
-		// Encrypt the file name
-		for (unsigned int i = 0; i < fileName.length(); i++) {
-			// change letter based on position of rotor
-			newMessage += (static_cast<unsigned char>(fileName[i]) + rotator) % UCHAR_MAX;
-			// increment rotor
-			rotator = (rotator + 1) % UCHAR_MAX;
-		}
-		file = newMessage;
+		unsigned int rotator = ROTOR;
+		file += EXTENSION;
 		// create encrypted file
 		ofstream cryptFile;
 		cryptFile.open(file.c_str());
@@ -32,17 +23,10 @@ bool encrypt(const string &fileName) {
 		while (!uncrypt.eof()) {
 			// Take current line in file
 			getline(uncrypt, message);
-			// reset newMessage
-			newMessage = "";
 			// Go through the message
-			for (unsigned int i = 0; i < message.length(); i++) {
-				// change the letter based on position of rotor
-				newMessage += (static_cast<unsigned char>(message[i]) + rotator) % UCHAR_MAX;
-				// increment rotor
-				rotator = (rotator + 1) % UCHAR_MAX;
-			}
+			cipher(message, rotator, true);
 			// put the encrypted line in the file.
-			cryptFile << newMessage << endl;
+			cryptFile << message << endl;
 		}
 		uncrypt.close();
 		cryptFile.close();
@@ -66,15 +50,10 @@ bool decrypt(const string &fileName)
 		// data to hold the encrypted message
 		string newMessage = "";
 		string message;
-		int rotator = ROTOR;
+		unsigned int rotator = ROTOR;
 		// Encrypt the file name
-		for (unsigned int i = 0; i < fileName.length(); i++) {
-			// change letter based on position of rotor
-			newMessage += (static_cast<unsigned char>(fileName[i]) + rotator) % UCHAR_MAX;
-			// increment rotor
-			rotator = (rotator + 1) % UCHAR_MAX;
-		}
-		file = newMessage;
+		//TODO Take enigma extension out of file name.
+		file = "";
 		// create decrypted file
 		ofstream uncrypt;
 		uncrypt.open(file.c_str());
@@ -82,15 +61,7 @@ bool decrypt(const string &fileName)
 		while (!cryptFile.eof()) {
 			// Take current line in file
 			getline(cryptFile, message);
-			// reset newMessage
-			newMessage = "";
-			// Go through the message
-			for (unsigned int i = 0; i < message.length(); i++) {
-				// change the letter based on position of rotor
-				newMessage += (static_cast<unsigned char>(message[i]) - rotator) % UCHAR_MAX;
-				// increment rotor
-				rotator = (rotator + 1) % UCHAR_MAX;
-			}
+			cipher(message, rotator, false);
 			// put the unencrypted line in the file.
 			uncrypt << newMessage << endl;
 		}
@@ -104,6 +75,16 @@ bool decrypt(const string &fileName)
 	return success;
 }
 // TODO Implement function cipher
-bool cipher(string &message, unsigned int rotor) {
-	return 1;
+void cipher(string &message, unsigned int &rotor, bool encrypt) {
+	if(encrypt) {
+		for(unsigned int i = 0; i < message.length(); i++) {
+			message[i] = ~(message[i] << rotor);
+			rotor++;
+		}
+	} else {
+		for(unsigned int i = 0; i < message.length(); i++) {
+			message[i] = (~message[i]) >> rotor;
+			rotor++;
+		}
+	}
 }
