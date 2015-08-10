@@ -7,7 +7,6 @@
 #include<climits>
 #include<cmath>
 #include<cstdlib>
-#include<cstring>
 using namespace std;
 
 // randomly generate a start point at compile time (I hope)
