@@ -48,7 +48,6 @@ bool decrypt(const string &fileName)
 		ifstream cryptFile;
 		cryptFile.open(file.c_str());
 		// data to hold the encrypted message
-		string newMessage = "";
 		string message;
 		unsigned int rotator = ROTOR;
 		// Encrypt the file name
@@ -63,7 +62,7 @@ bool decrypt(const string &fileName)
 			getline(cryptFile, message);
 			cipher(message, rotator, false);
 			// put the unencrypted line in the file.
-			uncrypt << newMessage << endl;
+			uncrypt << message << endl;
 		}
 		uncrypt.close();
 		cryptFile.close();
@@ -74,7 +73,7 @@ bool decrypt(const string &fileName)
 	// return if file was encrypted
 	return success;
 }
-// TODO Implement function cipher
+
 void cipher(string &message, unsigned int &rotor, bool encrypt) {
 	if(encrypt) {
 		for(unsigned int i = 0; i < message.length(); i++) {
