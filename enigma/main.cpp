@@ -8,7 +8,7 @@
  */
 
 #include"enigma.h"
-#include<>
+#include<string>
 
 // change from handling a message to handling a file
 int main(int argc, char **argv) {
@@ -44,6 +44,7 @@ int main(int argc, char **argv) {
 			break;
 		}
 	} else {
+		//TODO: Figure out what's wrong here.
 		if(strcmp(argv[0], "-e") == 0)
 			if(!encrypt(fileName)){
 				cerr << "failed to encrypt " << fileName << endl;
