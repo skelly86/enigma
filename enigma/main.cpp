@@ -8,6 +8,7 @@
  */
 
 #include"enigma.h"
+#include<iostream>
 #include<string>
 
 // change from handling a message to handling a file
