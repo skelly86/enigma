@@ -2,8 +2,11 @@
  * Implement to handle encrypting a file
  * TODO make encrypted file in an (original file name).extension format
  */
-
+#include<string>
+#include<iostream>
+#include<fstream>
 #include"enigma.h"
+using namespace std;
 bool encrypt(const string &fileName) {
 	bool success = true;
 	try {
@@ -77,12 +80,12 @@ bool decrypt(const string &fileName)
 void cipher(string &message, unsigned int &rotor, bool encrypt) {
 	if(encrypt) {
 		for(unsigned int i = 0; i < message.length(); i++) {
-			message[i] = ~(message[i] << rotor);
+			message[i] = ~((message[i] + rotor) % UCHAR_MAX);
 			rotor++;
 		}
 	} else {
 		for(unsigned int i = 0; i < message.length(); i++) {
-			message[i] = (~message[i]) >> rotor;
+			message[i] = ((~message[i]) - rotor) % UCHAR_MAX);
 			rotor++;
 		}
 	}

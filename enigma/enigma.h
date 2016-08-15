@@ -1,11 +1,8 @@
 #ifndef ENIGMA_H
 #define ENIGMA_H
 #include<exception>
-#include<iostream>
-#include<fstream>
 #include<string>
 #include<climits>
-#include<cmath>
 #include<cstdlib>
 using namespace std;
 
