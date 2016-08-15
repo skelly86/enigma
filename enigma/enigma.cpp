@@ -80,12 +80,12 @@ bool decrypt(const string &fileName)
 void cipher(string &message, unsigned int &rotor, bool encrypt) {
 	if(encrypt) {
 		for(unsigned int i = 0; i < message.length(); i++) {
-			message[i] = ~((message[i] + rotor) % UCHAR_MAX);
+			message[i] = ~((static_cast<unsigned char>(message[i]) + rotor) % UCHAR_MAX);
 			rotor++;
 		}
 	} else {
 		for(unsigned int i = 0; i < message.length(); i++) {
-			message[i] = ((~message[i]) - rotor) % UCHAR_MAX);
+			message[i] = ((~static_cast<unsigned char>(message[i])) - rotor) % UCHAR_MAX;
 			rotor++;
 		}
 	}
