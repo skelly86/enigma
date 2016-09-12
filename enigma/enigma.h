@@ -14,6 +14,6 @@ bool encrypt(const string &fileName);
 
 bool decrypt(const string &fileName);
 
-void cipher(string &message, unsigned int &rotor, bool encrypt);
+void cipher(string &message, unsigned long long int &rotor, bool encrypt);
 
 #endif
