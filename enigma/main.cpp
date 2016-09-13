@@ -12,10 +12,10 @@
 #include<string>
 
 // change from handling a message to handling a file
-int main(int argc, char **argv) {
+int32_t main(int argc, char **argv) {
 	// Data to hold the two message forms
 	string fileName;
-	int ending = 0;
+	int32_t ending = 0;
 	cout << "Enter the file name: ";
 	getline(cin, fileName);
 	if (argc == 0) {
@@ -52,14 +52,14 @@ int main(int argc, char **argv) {
 				ending++;
 			}
 			else
-				cout << "encryption complete" << endl;
+				cout << "encryption of " << fileName << " complete" << endl;
 		else if(strcmp(argv[0], "-d") == 0)
 			if(!decrypt(fileName)) {
 				cerr << "failed to decrypt " << fileName << endl;
 				ending++;
 			}
 			else
-				cout << "decryption complete" << endl;
+				cout << "decryption of " << fileName << " complete" << endl;
 		else {
 			cerr << "unrecognized function" << argv[0] << endl;
 			ending++;

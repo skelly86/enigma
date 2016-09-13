@@ -52,7 +52,7 @@ bool decrypt(const string &fileName)
 		key.open(fileName + ".key");
 		string message;
 		int rotator;
-		rotator << key;
+		key >> rotator;
 		//TODO Take enigma extension out of file name.
 		file = "";
 		uncrypt.open(file);
