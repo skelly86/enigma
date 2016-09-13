@@ -3,17 +3,19 @@
 #include<exception>
 #include<string>
 #include<climits>
+#include<cstdint>
 #include<cstdlib>
+#include<ctime>
+#define int uintmax_t
 using namespace std;
 
-// randomly generate a start point at compile time (I hope)
-#define ROTOR (rand() % UCHAR_MAX)
+#define ROTOR (rand() % UINTMAX_MAX)
 #define EXTENSION ".nga"
 
 bool encrypt(const string &fileName);
 
 bool decrypt(const string &fileName);
 
-void cipher(string &message, unsigned long long int &rotor, bool encrypt);
+void cipher(string &message, int &rotor, bool encrypt);
 
 #endif
