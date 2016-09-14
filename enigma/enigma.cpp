@@ -6,11 +6,11 @@
 #include<iostream>
 #include<fstream>
 #include"enigma.h"
-using namespace std;
+
 bool encrypt(const string &fileName) {
 	bool success = true;
 	srand(static_cast<int>(time(NULL)));
-	for(int i = 0, x = rand() % UCHAR_MAX;
+	for(int i = 0, x = rand() % UINTMAX_MAX;
 			i < x;
 			i++)
 		rand();
