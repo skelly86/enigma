@@ -11,7 +11,7 @@
 #include<iostream>
 #include<string>
 
-// change from handling a message to handling a file
+// TODO: Allow file to be sent in main argument string array
 int32_t main(int argc, char **argv) {
 	// Data to hold the two message forms
 	string fileName;
