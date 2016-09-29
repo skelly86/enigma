@@ -8,63 +8,45 @@
  */
 
 #include"enigma.h"
+//int has to be redefined as 32-bit if enigma.h is included
+#define int int32_t
 #include<iostream>
 #include<string>
+#include<cstring>
 
 // TODO: Allow file to be sent in main argument string array
-int32_t main(int argc, char **argv) {
-	// Data to hold the two message forms
-	string fileName;
-	int32_t ending = 0;
-	cout << "Enter the file name: ";
-	getline(cin, fileName);
-	if (argc == 0) {
-		prompt:
-		char prompt;
-		cout << "Encrypt or decrypt? (e or d) ";
-		cin >> prompt;
-		switch (toupper(prompt)) {
-		case 'E':
-			if (!encrypt(fileName)) {
-				cerr << "failed to encrypt " << fileName << endl;
-				ending++;
-			}
-			else
-				cout << "encryption complete" << endl;
-			break;
-		case 'D':
-			if (!decrypt(fileName)) {
-				cerr << "failed to decrypt " << fileName << endl;
-				ending++;
-			} else
-				cout << "decryption complete" << endl;
-			break;
-		default:
-			cerr << "Please select d or e";
-			goto prompt;
-			break;
-		}
-	} else {
-		//TODO: Figure out what's wrong here.
-		if(strcmp(argv[0], "-e") == 0)
-			if(!encrypt(fileName)){
-				cerr << "failed to encrypt " << fileName << endl;
-				ending++;
-			}
-			else
-				cout << "encryption of " << fileName << " complete" << endl;
-		else if(strcmp(argv[0], "-d") == 0)
-			if(!decrypt(fileName)) {
-				cerr << "failed to decrypt " << fileName << endl;
-				ending++;
-			}
-			else
-				cout << "decryption of " << fileName << " complete" << endl;
-		else {
-			cerr << "unrecognized function" << argv[0] << endl;
+// TODO: Only use the program by sending arguments to it
+bool handleArgs(int argc, const char ** argv);
+int main(int argc, const char **argv) {
+	int ending = 0;
+	if (argc > 0) {
+		if(!handleArgs(argc, argv))
 			ending++;
-		}
+		else
+			cout << "encryption complete" << endl;
 	}
 	
 	return ending;
+}
+// TODO: implement function
+bool handleArgs(int argc, const char ** argv) {
+	for(int i = 0; i < argc; i++) {
+		bool result;
+		if(argv[i,0] == '-')
+			for(int j = 1; j < strlen(argv[i]); j++)
+				char arg = argv[i,j];
+				switch(arg) {
+				case 'e':
+				case 'E':
+					result = encrypt(argv[i+1]);
+					break;
+				case 'd':
+				case 'D':
+					result = decrypt(argv[i+1]);
+					break;
+				default:
+					break;
+				}
+	}
+	return true;
 }
