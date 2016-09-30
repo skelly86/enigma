@@ -20,8 +20,10 @@ bool handleArgs(int argc, const char ** argv);
 int main(int argc, const char **argv) {
 	int ending = 0;
 	if (argc > 0) {
-		if(!handleArgs(argc, argv))
+		if(!handleArgs(argc, argv)){
+			cerr << "unknown error" << endl;
 			ending++;
+		}
 		else
 			cout << "encryption complete" << endl;
 	}
@@ -30,9 +32,9 @@ int main(int argc, const char **argv) {
 }
 // TODO: implement function
 bool handleArgs(int argc, const char ** argv) {
+	bool result;
 	for(int i = 0; i < argc; i++) {
-		bool result;
-		if(argv[i,0] == '-')
+		if(strchr(argv[i], '-') != NULL)
 			for(int j = 1; j < strlen(argv[i]); j++)
 				char arg = argv[i,j];
 				switch(arg) {
@@ -48,5 +50,5 @@ bool handleArgs(int argc, const char ** argv) {
 					break;
 				}
 	}
-	return true;
+	return result;
 }
