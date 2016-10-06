@@ -8,21 +8,18 @@
  */
 
 #include"enigma.h"
-//int has to be redefined as 32-bit if enigma.h is included
-#define int int32_t
 #include<iostream>
 #include<string>
 #include<cstring>
 
-// TODO: Allow file to be sent in main argument string array
-// TODO: Only use the program by sending arguments to it
-bool handleArgs(int argc, const char ** argv);
-int main(int argc, const char **argv) {
+bool handleArgs(int32_t argc, const char **argv);
+
+int32_t main(int32_t argc, const char **argv) {
 	int ending = 0;
 	if (argc > 0) {
 		if(!handleArgs(argc, argv)){
 			cerr << "unknown error" << endl;
-			ending++;
+			ending = EXIT_FAILURE;
 		}
 		else
 			cout << "encryption complete" << endl;
@@ -30,25 +27,16 @@ int main(int argc, const char **argv) {
 	
 	return ending;
 }
-// TODO: implement function
-bool handleArgs(int argc, const char ** argv) {
+// TODO: find a way to simplify
+bool handleArgs(int32_t argc, const char **argv) {
 	bool result;
-	for(int i = 0; i < argc; i++) {
+	for(int i = 0; i < argc; i++)
 		if(strchr(argv[i], '-') != NULL)
-			for(int j = 1; j < strlen(argv[i]); j++)
-				char arg = argv[i,j];
-				switch(arg) {
-				case 'e':
-				case 'E':
-					result = encrypt(argv[i+1]);
-					break;
-				case 'd':
-				case 'D':
-					result = decrypt(argv[i+1]);
-					break;
-				default:
-					break;
-				}
-	}
+			if(strchr(argv[i], 'e') != NULL ||
+					strchr(argv[i], 'E') != NULL)
+				result = encrypt(argv[i]+1);
+			else if (strchr(argv[i], 'd') != NULL ||
+					strchr(argv[i], 'D') != NULL)
+				result = decrypt(argv[i]+1);
 	return result;
 }

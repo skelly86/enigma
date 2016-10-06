@@ -9,6 +9,10 @@
 #define int uintmax_t
 using namespace std;
 
+#ifndef NULL
+#define NULL 0
+#endif
+
 #define ROTOR (rand() % UINTMAX_MAX)
 #define EXTENSION ".nga"
 
