@@ -9,8 +9,8 @@
 
 bool encrypt(const string &fileName) {
 	bool success = true;
-	srand(static_cast<int>(time(NULL)));
-	for(int i = 0, x = rand() % UINTMAX_MAX;
+	srand(static_cast<maxint>(time(NULL)));
+	for(maxint i = 0, x = rand() % UINTMAX_MAX;
 			i < x;
 			i++)
 		rand();
@@ -20,7 +20,7 @@ bool encrypt(const string &fileName) {
 		ofstream cryptFile, key;
 		uncrypt.open(file.c_str());
 		string message;
-		int rotator = ROTOR;
+		maxint rotator = ROTOR;
 		key.open(file + ".key");
 		key << rotator;
 		key.close();
@@ -41,8 +41,7 @@ bool encrypt(const string &fileName) {
 }
 
 // copied from encrypt(string), convert for decrypting
-bool decrypt(const string &fileName)
-{
+bool decrypt(const string &fileName) {
 	bool success = true;
 	try {
 		string file = fileName;
@@ -51,7 +50,7 @@ bool decrypt(const string &fileName)
 		cryptFile.open(fileName);
 		key.open(fileName + ".key");
 		string message;
-		int rotator;
+		maxint rotator;
 		key >> rotator;
 		//TODO Take enigma extension out of file name.
 		file = "";
@@ -70,11 +69,11 @@ bool decrypt(const string &fileName)
 	return success;
 }
 
-void cipher(string &message, int &rotor, bool encrypt) {
+void cipher(string &message, maxint &rotor, bool encrypt) {
 	if(encrypt)
-		for(int i = 0; i < message.length(); i++)
+		for(maxint i = 0; i < message.length(); i++)
 			message[i] = ~((static_cast<unsigned char>(message[i]) + rotor++) % UCHAR_MAX);
 	else
-		for(int i = 0; i < message.length(); i++)
+		for(maxint i = 0; i < message.length(); i++)
 			message[i] = ((~static_cast<unsigned char>(message[i])) - rotor++) % UCHAR_MAX;
 }

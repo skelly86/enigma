@@ -6,12 +6,8 @@
 #include<cstdint>
 #include<cstdlib>
 #include<ctime>
-#define int uintmax_t
+typedef uintmax_t maxint;
 using namespace std;
-
-#ifndef NULL
-#define NULL 0
-#endif
 
 #define ROTOR (rand() % UINTMAX_MAX)
 #define EXTENSION ".nga"
@@ -20,6 +16,6 @@ bool encrypt(const string &fileName);
 
 bool decrypt(const string &fileName);
 
-void cipher(string &message, int &rotor, bool encrypt);
+void cipher(string &message, maxint &rotor, bool encrypt);
 
 #endif
